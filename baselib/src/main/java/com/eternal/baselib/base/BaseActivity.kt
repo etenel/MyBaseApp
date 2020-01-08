@@ -7,6 +7,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import java.lang.reflect.ParameterizedType
+import java.lang.reflect.Type
 
 abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel>() :
     AppCompatActivity(), IActivity {
@@ -26,8 +28,9 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel>() :
         }
         viewModelId = initVariableId()
         //私有的初始化ViewModel方法
+        val modelClass: Class<VM> = (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[1] as Class<VM>
         viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(application)
-            .create(viewModel.javaClass)
+            .create(modelClass)
         initData(savedInstanceState)
         //私有的ViewModel与View的契约事件回调逻辑
         registerUIChangeLiveDataCallBack()

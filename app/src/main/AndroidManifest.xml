@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".mvvm.ui.activity.DemoActivity"/>
+        <activity android:name=".mvvm.ui.activity.WebViewActivity"></activity>
+        <activity android:name=".mvvm.ui.activity.DemoActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
