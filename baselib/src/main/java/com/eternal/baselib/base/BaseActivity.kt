@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
-abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel>() :
+abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel<*>>() :
     AppCompatActivity(), IActivity {
     protected lateinit var binding: V
     protected lateinit var viewModel: VM

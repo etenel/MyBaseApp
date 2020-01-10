@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 
-abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel>() :
+abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel<*>>() :
     Fragment(), IFragment {
     protected lateinit var binding: V
     protected lateinit var viewModel: VM

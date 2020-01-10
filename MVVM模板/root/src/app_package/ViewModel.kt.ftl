@@ -5,7 +5,7 @@ import com.eternal.baselib.base.BaseViewModel
 
 
 
-class ${pageName}ViewModel(application: Application) : BaseViewModel(application) {
+class ${pageName}ViewModel(application: Application) : BaseViewModel<${pageName}Model>(application) {
 
 
     init{

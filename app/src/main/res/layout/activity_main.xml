@@ -5,5 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-<include layout="@layout/include_title"/>
+
+    <include
+        android:id="@+id/bar"
+        layout="@layout/include_title" />
+
+    <Button
+        android:id="@+id/bt_web_view"
+        android:text="@string/web_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/bar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

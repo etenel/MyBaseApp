@@ -11,9 +11,9 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Consumer
 
 
-open class BaseViewModel(application: Application) : AndroidViewModel(application), IViewModel,
+open class BaseViewModel<M :IModel>(application: Application) : AndroidViewModel(application), IViewModel,
     Consumer<Disposable> {
-    protected lateinit var model: BaseModel
+    protected lateinit var model: M
     protected var mCompositeDisposable: CompositeDisposable? = null
     val ui: UIChangeLiveData<Void>
 

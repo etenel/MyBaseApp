@@ -2,7 +2,7 @@ package com.eternal.baselib.base
 
 import androidx.databinding.ViewDataBinding
 
-abstract class BaseLazyFragment<V : ViewDataBinding, VM : BaseViewModel>() :
+abstract class BaseLazyFragment<V : ViewDataBinding, VM : BaseViewModel<*>>() :
     BaseFragment<V,VM>(), IFragment {
     var isViewCreated: Boolean = false
     var isDataLoaded: Boolean = false
