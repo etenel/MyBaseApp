@@ -5,7 +5,7 @@ import com.eternal.base.mvvm.model.WebViewModel
 import com.eternal.baselib.base.BaseViewModel
 
 
-class WebViewViewModel(application: Application) : BaseViewModel(application) {
+class WebViewViewModel(application: Application) : BaseViewModel<WebViewModel>(application) {
 
 
     init {

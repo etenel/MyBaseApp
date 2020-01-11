@@ -1,4 +1,4 @@
-package com.eternal.baselib.http
+package com.eternal.base.http
 
 import com.eternal.baselib.BuildConfig
 import okhttp3.OkHttpClient
@@ -34,14 +34,14 @@ abstract class BaseRetrofitClient {
 
     protected abstract fun handleBuilder(builder: OkHttpClient.Builder)
 
-    protected fun  getRetrofit( baseUrl: String): Retrofit {
+    fun <S> getService(serviceClass: Class<S>, baseUrl: String): S {
         return Retrofit.Builder()
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
 //                .addCallAdapterFactory(CoroutineCallAdapterFactory.invoke())
             .baseUrl(baseUrl)
-            .build()
+            .build().create(serviceClass)
     }
 
 }

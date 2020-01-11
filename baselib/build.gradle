@@ -60,12 +60,7 @@ dependencies {
     api rootProject.ext.dependencies["livedata-ktx"]
     api rootProject.ext.dependencies["viewmodel-ktx"]
     kapt rootProject.ext.dependencies["lifecycle-compiler"]
-//http
-    //network
-    api(rootProject.ext.dependencies["retrofit"])
-    implementation(rootProject.ext.dependencies["okhttp-logger"])
-    api rootProject.ext.dependencies["rxjava2"]
-    api rootProject.ext.dependencies["gson"]
+    implementation rootProject.ext.dependencies["rxjava2"]
     api(rootProject.ext.dependencies["rxandroid2"]) {
         exclude module: 'rxjava'
     }
@@ -79,18 +74,7 @@ dependencies {
         exclude module: 'rxandroid'
         exclude module: 'rxlifecycle'
     }
-    api(rootProject.ext.dependencies["retrofit-adapter-rxjava2"]) {
-        exclude module: 'rxjava'
-        exclude module: 'okhttp'
-        exclude module: 'retrofit'
-        exclude module: 'okio'
-    }
-    api(rootProject.ext.dependencies["retrofit-converter-gson"]) {
-        exclude module: 'gson'
-        exclude module: 'okhttp'
-        exclude module: 'okio'
-        exclude module: 'retrofit'
-    }
+
 
     testImplementation rootProject.ext.dependencies["junit"]
     androidTestImplementation rootProject.ext.dependencies["ext-junit"]

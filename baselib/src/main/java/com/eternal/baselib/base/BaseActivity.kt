@@ -31,6 +31,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel<*>>() :
         val modelClass: Class<VM> = (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[1] as Class<VM>
         viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(application)
             .create(modelClass)
+        viewModel.injectLifecycle(lifecycle)
         initData(savedInstanceState)
         //私有的ViewModel与View的契约事件回调逻辑
         registerUIChangeLiveDataCallBack()

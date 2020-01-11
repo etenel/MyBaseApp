@@ -1,4 +1,4 @@
-package com.eternal.baselib.http
+package com.eternal.base.http
 
 import java.io.IOException
 import java.io.InputStream

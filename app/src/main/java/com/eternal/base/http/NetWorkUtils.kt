@@ -1,4 +1,4 @@
-package com.eternal.baselib.http
+package com.eternal.base.http
 
 import android.content.Context
 import android.net.ConnectivityManager

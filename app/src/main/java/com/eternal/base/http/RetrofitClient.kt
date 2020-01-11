@@ -1,23 +1,14 @@
 package com.eternal.base.http
 
 import com.eternal.base.app.App
-import com.eternal.baselib.http.BaseRetrofitClient
-import com.eternal.baselib.http.NetWorkUtils
 import okhttp3.Cache
 import okhttp3.CacheControl
 import okhttp3.OkHttpClient
-import retrofit2.Retrofit
 import java.io.File
 
 object RetrofitClient : BaseRetrofitClient() {
-    private var retrofit: Retrofit = getRetrofit(Api.BASE_URL)
     val service by lazy {
-        getService(ApiService::class.java)
-    }
-
-
-    private fun <T> getService(serviceClass: Class<T>): T {
-        return retrofit.create(serviceClass)
+        getService(ApiService::class.java,Api.BASE_URL)
     }
 
     override fun handleBuilder(builder: OkHttpClient.Builder) {

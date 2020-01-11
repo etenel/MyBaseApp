@@ -1,10 +1,7 @@
 package com.eternal.baselib.base
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
+import androidx.lifecycle.*
 import com.eternal.baselib.event.SingleLiveEvent
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -41,7 +38,11 @@ open class BaseViewModel<M :IModel>(application: Application) : AndroidViewModel
     override fun accept(t: Disposable) {
         addDispose(t)
     }
-
+    //将 LifecycleObserver 注册给 LifecycleOwner 后 @OnLifecycleEvent 才可以正常使用
+    fun injectLifecycle(lifecycle: Lifecycle) {
+        lifecycle.addObserver(this)
+        lifecycle.addObserver((model as LifecycleObserver))
+    }
     override fun onAny(owner: LifecycleOwner?, event: Lifecycle.Event?) {
 
     }

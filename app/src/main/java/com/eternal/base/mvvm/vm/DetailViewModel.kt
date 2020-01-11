@@ -5,7 +5,7 @@ import com.eternal.base.mvvm.model.DetailModel
 import com.eternal.baselib.base.BaseViewModel
 
 
-class DetailViewModel(application: Application) : BaseViewModel(application) {
+class DetailViewModel(application: Application) : BaseViewModel<DetailModel>(application) {
 
 
     init {

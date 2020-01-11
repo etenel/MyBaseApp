@@ -47,6 +47,7 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel<*>>() :
             viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(it)
                 .create(viewModel.javaClass)
         }
+        viewModel.injectLifecycle(lifecycle)
         //私有的ViewModel与View的契约事件回调逻辑
         registerUIChangeLiveDataCallBack()
         //页面数据初始化方法
