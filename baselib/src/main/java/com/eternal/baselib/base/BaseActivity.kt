@@ -34,10 +34,11 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel<*>>() :
         viewModel.injectLifecycle(lifecycle)
         //私有的ViewModel与View的契约事件回调逻辑
         registerUIChangeLiveDataCallBack()
-        //页面数据初始化方法
-        initData(savedInstanceState)
         //页面事件监听的方法，一般用于ViewModel层转到View层的事件注册
         initViewObservable()
+        //页面数据初始化方法
+        initData(savedInstanceState)
+
         binding.lifecycleOwner = this
         if (viewModelId != 0) {
             binding.setVariable(viewModelId, viewModel)
