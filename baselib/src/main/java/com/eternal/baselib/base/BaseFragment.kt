@@ -10,6 +10,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import java.lang.reflect.ParameterizedType
 
 abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel<*>>() :
     Fragment(), IFragment {
@@ -44,8 +45,9 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel<*>>() :
         super.onActivityCreated(savedInstanceState)
         //私有的初始化ViewModel方法
         activity?.application?.let {
-            viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(it)
-                .create(viewModel.javaClass)
+            val modelClass: Class<VM> =
+                (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[1] as Class<VM>
+            viewModel=ViewModelProvider(this,ViewModelProvider.AndroidViewModelFactory.getInstance(it)).get(modelClass)
         }
         viewModel.injectLifecycle(lifecycle)
         //私有的ViewModel与View的契约事件回调逻辑

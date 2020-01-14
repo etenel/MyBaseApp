@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
+@Suppress("UNCHECKED_CAST")
 abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel<*>>() :
     AppCompatActivity(), IActivity {
     protected lateinit var binding: V
@@ -29,8 +30,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel<*>>() :
         viewModelId = initVariableId()
         //私有的初始化ViewModel方法
         val modelClass: Class<VM> = (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[1] as Class<VM>
-        viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(application)
-            .create(modelClass)
+        viewModel=ViewModelProvider(this,ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(modelClass)
         viewModel.injectLifecycle(lifecycle)
         //私有的ViewModel与View的契约事件回调逻辑
         registerUIChangeLiveDataCallBack()
