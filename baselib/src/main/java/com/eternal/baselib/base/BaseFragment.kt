@@ -1,6 +1,8 @@
 package com.eternal.baselib.base
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -73,6 +75,10 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel<*>>() :
         viewModel.ui.finishEvent.observe(viewLifecycleOwner, Observer {
            activity?.finish()
         })
+        viewModel.ui.finishResultEvent.observe(viewLifecycleOwner, Observer {
+            activity?.setResult(Activity.RESULT_OK,it)
+            activity?.finish()
+        })
         viewModel.ui.onBackPressedEvent.observe(viewLifecycleOwner, Observer {
             activity?.onBackPressed()
         })
@@ -83,6 +89,7 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel<*>>() :
             hideLoadMore()
         })
     }
+
     override fun onDetach() {
         super.onDetach()
         binding.unbind()

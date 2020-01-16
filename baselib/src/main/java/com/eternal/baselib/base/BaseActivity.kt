@@ -1,5 +1,6 @@
 package com.eternal.baselib.base
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.InflateException
 import androidx.appcompat.app.AppCompatActivity
@@ -29,8 +30,12 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel<*>>() :
         }
         viewModelId = initVariableId()
         //私有的初始化ViewModel方法
-        val modelClass: Class<VM> = (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[1] as Class<VM>
-        viewModel=ViewModelProvider(this,ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(modelClass)
+        val modelClass: Class<VM> =
+            (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[1] as Class<VM>
+        viewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.AndroidViewModelFactory.getInstance(application)
+        ).get(modelClass)
         viewModel.injectLifecycle(lifecycle)
         //私有的ViewModel与View的契约事件回调逻辑
         registerUIChangeLiveDataCallBack()
@@ -50,6 +55,7 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel<*>>() :
         super.onDestroy()
         binding.unbind()
     }
+
     private fun registerUIChangeLiveDataCallBack() {
         viewModel.ui.showDialogEvent.observe(this, Observer {
             // showDialog(it)
@@ -58,6 +64,10 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel<*>>() :
             //            dismissDialog()
         })
         viewModel.ui.finishEvent.observe(this, Observer {
+            finish()
+        })
+        viewModel.ui.finishResultEvent.observe(this, Observer {
+            setResult(Activity.RESULT_OK, it)
             finish()
         })
         viewModel.ui.onBackPressedEvent.observe(this, Observer {
